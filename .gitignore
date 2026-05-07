@@ -1,0 +1,51 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.VC.db
+*.VC.opendb
+
+# Build output
+x64/
+Debug/
+Release/
+build/
+out/
+bin/
+obj/
+
+# C/C++ build artifacts
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.lib
+*.exp
+*.tlog
+*.lastbuildstate
+*.log
+*.idb
+*.ipch
+*.iobj
+*.ipdb
+*.dll
+
+# Generated/debug files
+*.tmp
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Keep source-controlled Visual Studio project files
+!*.slnx
+!*.vcxproj
+!*.vcxproj.filters
+
+# Specific files
+FlightProbe/Vendor/static_pressure_defs.h
+FlightProbe/Vendor/Adafruit_LSM9DS1.h
