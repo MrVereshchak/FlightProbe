@@ -19,10 +19,10 @@ public:
 
 private:
 	struct AaHandle {
-		Aardvark    sessionHandle; // active session ID from aa_open
+		Aardvark         sessionHandle; // active session ID from aa_open
 		std::uint32_t    uniqueId;      // serial number
 		std::uint16_t    port;          // current USB index
-		std::string name;          // aardvark name
+		std::string      name;          // aardvark name
 
 		// Status and Configuration
 		AardvarkVersion aaVersion;
@@ -32,9 +32,9 @@ private:
 			pullup;
 
         AaHandle() : 
-            sessionHandle(),
-            uniqueId(0),
-            port(0),          
+            sessionHandle(-1),
+            uniqueId(-1),
+            port(-1),          
             name(""),
             aaVersion(),
             status(-1),
@@ -48,7 +48,7 @@ private:
 	AaHandle aaHandle;
 
 private:
-	AardvarkI2C(AaHandle&& aaHandlePassed);
+	AardvarkI2C(AaHandle &&aaHandlePassed);
 
 	static AardvarkI2cFlags toAardvarkFlags(I2cFlags flag);
 

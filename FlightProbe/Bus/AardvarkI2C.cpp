@@ -34,15 +34,20 @@ std::vector<AardvarkI2C::AaPortInfo> AardvarkI2C::discover(bool printDetails)
 
 	// Aardvark detection
 	const int foundDevicesCount = aa_find_devices_ext(
-		Config::EXPECTED_NUM_OF_DEVICES, rawPorts.data(),
-		Config::EXPECTED_NUM_OF_DEVICES, rawIds.data()
+		Config::EXPECTED_NUM_OF_DEVICES, rawPorts.data(), Config::EXPECTED_NUM_OF_DEVICES, rawIds.data()
 	);
 
-	if (foundDevicesCount <= 0)
+	if (foundDevicesCount < 0)
 	{
 		if (printDetails)
 		{
-			std::cout << "No devices were found" << std::endl;
+            const char* statusStr = aa_status_string(foundDevicesCount);
+
+            std::cerr << "aa_find_devices_ext failed: "
+                << foundDevicesCount
+                << " = "
+                << (statusStr ? statusStr : "aa_status_string returned null")
+                << std::endl;
 		}
 		return {};
 	}

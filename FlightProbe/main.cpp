@@ -26,9 +26,11 @@ int main()
 {
     std::vector<Channel> channels;
     AoaCalc aoaCalculator;
+    // TODO: move declarations
     AoaPresenter::AoaIndicator aoaIndicator;
     std::ofstream calibLogs;
 
+    // TODO: research #if vs if constexpr
     if constexpr (Config::DISPLAY_MODE)
     {
         if (!AoaPresenter::enableVirtualTerminal())
@@ -40,27 +42,30 @@ int main()
         AoaPresenter::beginFullScreenUi();
     }
 
+    // TODO: move to the AardvarkI2C class
     for (std::unique_ptr<AardvarkI2C>& aaDevice : AardvarkI2C::enumerateDevices(true))
     {
         std::string tmpName = std::format("Channel: {}", aaDevice->getBusName());
 
         channels.emplace_back(tmpName, std::move(aaDevice));
 
-        std::uint32_t deviceId = channels.back().getAaId();
+        auto &channel = channels.back();
+
+        std::uint32_t deviceId = channel.getAaId();
 
         if (deviceId == AaConfig::ID_PFWD)
         {
-            channels.back().addPressureSensor(PressureConfig::MS4525DO_FWD);
+            channel.addPressureSensor(PressureConfig::MS4525DO_FWD);
         }
         if (deviceId == AaConfig::ID_P45)
         {
-            channels.back().addPressureSensor(PressureConfig::MS4525DO_45);
+            channel.addPressureSensor(PressureConfig::MS4525DO_45);
         }
 #if 0
         else if (deviceId == AaConfig::ID_PST_IMU)
         {
-            channels.back().addPressureSensor(SSCSRNN1_STAT);
-            channels.back().addIMUSensor(LSM9DS1);
+            channel.addPressureSensor(SSCSRNN1_STAT);
+            channel.addIMUSensor(LSM9DS1);
         }
 #endif
     }
@@ -84,7 +89,6 @@ int main()
     }
 
     // Count & Time
-    // TODO: store reads
     std::uint32_t counter = 0;
     // auto = std::chrono::steady_clock::time_point
     auto startTime = std::chrono::steady_clock::now();
@@ -121,13 +125,13 @@ int main()
             std::cout << std::format("[{:05}] [{:08}ms] ", counter, loopTime.count());
         }
 
-        for (Channel& channel : channels)
+        for (Channel &channel : channels)
         {
-            for (std::unique_ptr<Sensor>& sensor : channel.pSensors)
+            for (std::unique_ptr<Sensor> &sensor : channel.pSensors)
             {
                 SensorResult rawResult = sensor->getDecodedData();
 
-                if (PressureResult* pPressureResult = std::get_if<PressureResult>(&rawResult))
+                if (PressureResult *pPressureResult = std::get_if<PressureResult>(&rawResult))
                 {
                     if constexpr (!Config::DISPLAY_MODE)
                     {
