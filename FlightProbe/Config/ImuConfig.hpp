@@ -11,9 +11,9 @@ namespace ImuConfig
         std::uint16_t magnAddress;
 
         // Who am I call configuration
-        std::uint8_t whoAmIReg;    // Who am I register address
-        std::uint8_t agExpID;      // Expected ID return for accl/gyro after who am I call
-        std::uint8_t magExpID;     // Expected ID return for magn after who am I call
+        std::uint8_t whoAmIReg; // Who am I register address
+        std::uint8_t agExpID;   // Expected ID return for accl/gyro after who am I call
+        std::uint8_t magExpID;  // Expected ID return for magn after who am I call
 
         // Register addresses
         std::uint8_t acclReg;      // CTRL_REG6_XL sets data rate, scale, bandwidth
@@ -24,7 +24,7 @@ namespace ImuConfig
         std::uint8_t magnRegPerfZ; // CTRL_REG4_M, sets accuracy performance (operative) mode for Z
         // accuracy mode means how much internal work the chip does to make that answer cleaner
 
-// Read register addresses
+        // Read register addresses
         std::uint8_t acclReadReg;
         std::uint8_t gyroReadReg;
         std::uint8_t magnReadReg;
@@ -41,19 +41,17 @@ namespace ImuConfig
         std::uint8_t magnInitValPerfZ;
 
         // Scaling factors (sensitivities)
-        float acclScale;      // mg per bit
-        float gyroScale;      // dps per bit
-        float magnScale;      // mgauss per bit
+        float acclScale; // mg per bit
+        float gyroScale; // dps per bit
+        float magnScale; // mgauss per bit
     };
 
-    constexpr Device LSM9DS1 =
-    {
-        0x006b, 0x001e,                         // Addresses
-        0x0f, 0x68, 0x3d,                       // Who am I configuration
-        0x20, 0x10, 0x20, 0x21, 0x22, 0x23,     // Registers
-        0x28, 0x18, 0x28, 0x06,                 // Read register addresses, read size                         
-        0x68, 0x60, 0xbc, 0x00, 0x00 ,0x04,     // Configuration codes 119Hz (accl/gyro), +/-16g (accl), 245dps (gyro), 80Hz, 4gauss
-        0.732f, 0.00875f, 0.14f                 // Sensitivity multipliers for +/-16g, 245dps, 4gauss
+    constexpr Device LSM9DS1 = {
+        0x006b, 0x001e,                     // Addresses
+        0x0f, 0x68, 0x3d,                   // Who am I configuration
+        0x20, 0x10, 0x20, 0x21, 0x22, 0x23, // Registers
+        0x28, 0x18, 0x28, 0x06,             // Read register addresses, read size
+        0x68, 0x60, 0xbc, 0x00, 0x00, 0x04, // Configuration codes 119Hz (accl/gyro), +/-16g (accl), 245dps (gyro), 80Hz, 4gauss
+        0.732f, 0.00875f, 0.14f             // Sensitivity multipliers for +/-16g, 245dps, 4gauss
     };
 }
-

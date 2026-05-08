@@ -1,13 +1,13 @@
-#include <chrono>   // for time measurement
-#include <conio.h>  // for _kbhit and _getch
-#include <cstdint>  // for std::uint*_t types
+#include <chrono>  // for time measurement
+#include <conio.h> // for _kbhit and _getch
+#include <cstdint> // for std::uint*_t types
 #include <format>
 #include <fstream>
 #include <iostream>
 #include <memory>
 #include <string>
-#include <thread>   // for sleep_for
-#include <utility>  // for std::move
+#include <thread>  // for sleep_for
+#include <utility> // for std::move
 #include <variant>
 #include <vector>
 
@@ -43,7 +43,7 @@ int main()
     }
 
     // TODO: move to the AardvarkI2C class
-    for (std::unique_ptr<AardvarkI2C>& aaDevice : AardvarkI2C::enumerateDevices(true))
+    for (std::unique_ptr<AardvarkI2C> &aaDevice : AardvarkI2C::enumerateDevices(true))
     {
         std::string tmpName = std::format("Channel: {}", aaDevice->getBusName());
 
@@ -107,7 +107,8 @@ int main()
 
             if (ch == 'q' || ch == 'Q')
             {
-                std::cout << std::endl << "Stopping loop..." << std::endl;
+                std::cout << std::endl
+                          << "Stopping loop..." << std::endl;
                 break;
             }
         }
@@ -136,9 +137,9 @@ int main()
                     if constexpr (!Config::DISPLAY_MODE)
                     {
                         std::cout << "(" << sensor->getBusName()
-                            << std::format(" raw:{:>5} corr:{:>6} ",
-                                pPressureResult->rawCount,
-                                pPressureResult->correctedCount);
+                                  << std::format(" raw:{:>5} corr:{:>6} ",
+                                                 pPressureResult->rawCount,
+                                                 pPressureResult->correctedCount);
                     }
 
                     if (pPressureResult->valid)
@@ -195,13 +196,13 @@ int main()
                     aoaResult.coeff2,
                     aoaResult.coeff3,
                     aoaResult.aoaRaw,
-                    aoaResult.aoaFiltered
-                );
+                    aoaResult.aoaFiltered);
 
                 if (counter >= Config::CALIBRATION_COUNT)
                 {
                     calibLogs.close();
-                    std::cout << std::endl << "Stopping loop..." << std::endl;
+                    std::cout << std::endl
+                              << "Stopping loop..." << std::endl;
                     break;
                 }
             }
@@ -216,15 +217,13 @@ int main()
                         aoaResult.p45Filtered,
                         aoaResult.coeff0,
                         aoaResult.aoaRaw,
-                        aoaResult.aoaFiltered
-                    );
+                        aoaResult.aoaFiltered);
                 }
                 else
                 {
                     std::cout << std::format(
                         " | AOA waiting for airflow (pfwdF:{:>7.2f})",
-                        aoaResult.pfwdFiltered
-                    );
+                        aoaResult.pfwdFiltered);
                 }
             }
         }

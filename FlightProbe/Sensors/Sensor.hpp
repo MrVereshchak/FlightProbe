@@ -10,24 +10,24 @@
 class Sensor
 {
 private:
-	SensorBus* pInterface;
+    SensorBus *pInterface;
+
 public:
+    Sensor(SensorBus *pBus);
 
-	Sensor(SensorBus* pBus);
+    // Block copying to prevent dangling pInterface pointers
+    Sensor(const Sensor &) = delete;
+    Sensor &operator=(const Sensor &) = delete;
 
-	// Block copying to prevent dangling pInterface pointers
-	Sensor(const Sensor&) = delete;
-	Sensor& operator=(const Sensor&) = delete;
+    Sensor(Sensor &&) = default;
+    Sensor &operator=(Sensor &&) = default;
 
-	Sensor(Sensor&&) = default;
-	Sensor& operator=(Sensor&&) = default;
+    int read(std::uint16_t address, std::uint16_t readSize, std::vector<std::uint8_t> &buffer);
+    int write(std::uint16_t address, std::uint16_t writeSize, const std::vector<std::uint8_t> &buffer, I2cFlags flag = I2cFlags::None);
 
-	int read(std::uint16_t address, std::uint16_t readSize, std::vector<std::uint8_t>& buffer);
-	int write(std::uint16_t address, std::uint16_t writeSize, const std::vector<std::uint8_t>& buffer, I2cFlags flag = I2cFlags::None);
+    std::string getBusName();
 
-	std::string getBusName();
+    virtual SensorResult getDecodedData() = 0;
 
-	virtual SensorResult getDecodedData() = 0;
-
-	virtual ~Sensor(void);
+    virtual ~Sensor(void);
 };

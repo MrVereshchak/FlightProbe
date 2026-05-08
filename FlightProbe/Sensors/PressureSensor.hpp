@@ -8,19 +8,19 @@
 class PressureSensor : public Sensor
 {
 private:
-	PressureConfig::Device config;
+    PressureConfig::Device config;
 
 public:
-	PressureSensor(SensorBus* pBus, PressureConfig::Device configParam);
+    PressureSensor(SensorBus *pBus, PressureConfig::Device configParam);
 
-	// Block copying to prevent dangling pInterface pointers
-	PressureSensor(const PressureSensor&) = delete;
-	PressureSensor& operator=(const PressureSensor&) = delete;
+    // Block copying to prevent dangling pInterface pointers
+    PressureSensor(const PressureSensor &) = delete;
+    PressureSensor &operator=(const PressureSensor &) = delete;
 
-	PressureSensor(PressureSensor&&) = default;
-	PressureSensor& operator=(PressureSensor&&) = default;
+    PressureSensor(PressureSensor &&) = default;
+    PressureSensor &operator=(PressureSensor &&) = default;
 
-	SensorResult getDecodedData() override;
+    SensorResult getDecodedData() override;
 
-	~PressureSensor();
+    ~PressureSensor();
 };

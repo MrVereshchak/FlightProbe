@@ -7,27 +7,27 @@
 
 #include "SensorBus.hpp"
 
-Sensor::Sensor(SensorBus* pBus) : pInterface(pBus)
+Sensor::Sensor(SensorBus *pBus) : pInterface(pBus)
 {
-	if (!pBus)
-	{
-		throw std::invalid_argument("SensorBus cannot be null\n");
-	}
+    if (!pBus)
+    {
+        throw std::invalid_argument("SensorBus cannot be null\n");
+    }
 }
 
-int Sensor::read(std::uint16_t address, std::uint16_t readSize, std::vector<std::uint8_t>& buffer)
+int Sensor::read(std::uint16_t address, std::uint16_t readSize, std::vector<std::uint8_t> &buffer)
 {
-	return pInterface->read(address, readSize, buffer);
+    return pInterface->read(address, readSize, buffer);
 }
 
-int Sensor::write(std::uint16_t address, std::uint16_t writeSize, const std::vector<std::uint8_t>& buffer, I2cFlags flag)
+int Sensor::write(std::uint16_t address, std::uint16_t writeSize, const std::vector<std::uint8_t> &buffer, I2cFlags flag)
 {
-	return pInterface->write(address, writeSize, buffer, flag);
+    return pInterface->write(address, writeSize, buffer, flag);
 }
 
 std::string Sensor::getBusName()
 {
-	return pInterface->getBusName();
+    return pInterface->getBusName();
 }
 
 Sensor::~Sensor(void)
