@@ -7,16 +7,14 @@
 #include <memory>
 #include <string>
 #include <thread>  // for sleep_for
-#include <utility> // for std::move
 #include <variant>
 #include <vector>
 
-#include "AaConfig.hpp"
-#include "AardvarkI2C.hpp"
 #include "AoaCalc.hpp"
 #include "AoaPresenter.hpp"
 #include "AppConfig.hpp"
 #include "Channel.hpp"
+#include "ChannelFactory.hpp"
 #include "PressureConfig.hpp"
 #include "Sensor.hpp"
 #include "SensorResult.hpp"
@@ -24,7 +22,6 @@
 // main should read like a story
 int main()
 {
-    std::vector<Channel> channels;
     AoaCalc aoaCalculator;
     // TODO: move declarations
     AoaPresenter::AoaIndicator aoaIndicator;
@@ -42,33 +39,7 @@ int main()
         AoaPresenter::beginFullScreenUi();
     }
 
-    // TODO: move to the AardvarkI2C class
-    for (std::unique_ptr<AardvarkI2C> &aaDevice : AardvarkI2C::enumerateDevices(true))
-    {
-        std::string tmpName = std::format("Channel: {}", aaDevice->getBusName());
-
-        channels.emplace_back(tmpName, std::move(aaDevice));
-
-        auto &channel = channels.back();
-
-        std::uint32_t deviceId = channel.getAaId();
-
-        if (deviceId == AaConfig::ID_PFWD)
-        {
-            channel.addPressureSensor(PressureConfig::MS4525DO_FWD);
-        }
-        if (deviceId == AaConfig::ID_P45)
-        {
-            channel.addPressureSensor(PressureConfig::MS4525DO_45);
-        }
-#if 0
-        else if (deviceId == AaConfig::ID_PST_IMU)
-        {
-            channel.addPressureSensor(SSCSRNN1_STAT);
-            channel.addIMUSensor(LSM9DS1);
-        }
-#endif
-    }
+    std::vector<Channel> channels = ChannelFactory::createAardvarkChannels(true);
 
     if constexpr (Config::CALIBRATION_MODE)
     {

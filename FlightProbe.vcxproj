@@ -24,6 +24,7 @@
     <ClCompile Include="FlightProbe\Bus\AardvarkI2C.cpp" />
     <ClCompile Include="FlightProbe\Bus\SensorBus.cpp" />
     <ClCompile Include="FlightProbe\Channel\Channel.cpp" />
+    <ClCompile Include="FlightProbe\Channel\ChannelFactory.cpp" />
     <ClCompile Include="FlightProbe\main.cpp" />
     <ClCompile Include="FlightProbe\Sensors\ImuSensor.cpp" />
     <ClCompile Include="FlightProbe\Sensors\PressureSensor.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="FlightProbe\Bus\AardvarkI2C.hpp" />
     <ClInclude Include="FlightProbe\Bus\SensorBus.hpp" />
     <ClInclude Include="FlightProbe\Channel\Channel.hpp" />
+    <ClInclude Include="FlightProbe\Channel\ChannelFactory.hpp" />
     <ClInclude Include="FlightProbe\Config\AaConfig.hpp" />
     <ClInclude Include="FlightProbe\Config\AoaCalcConfig.hpp" />
     <ClInclude Include="FlightProbe\Config\AppConfig.hpp" />
