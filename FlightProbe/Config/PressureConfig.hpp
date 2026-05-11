@@ -31,7 +31,7 @@ namespace PressureConfig
     };
 
     // SSCSRNN1.6BA7A3
-    constexpr Device SSCSRNN1_STAT = {
+    inline constexpr Device SSCSRNN1_STAT = {
         0x0078,
         4,
         1638.0f,
@@ -44,7 +44,7 @@ namespace PressureConfig
     };
 
     // MS4525DO-DS5AI001DP
-    constexpr Device MS4525DO_FWD = {
+    inline constexpr Device MS4525DO_FWD = {
         0x0028,
         4,
         1638.0f,
@@ -57,7 +57,7 @@ namespace PressureConfig
     };
 
     // MS4525DO-DS5AI001DP
-    constexpr Device MS4525DO_45 = {
+    inline constexpr Device MS4525DO_45 = {
         0x0028,
         4,
         1638.0f,

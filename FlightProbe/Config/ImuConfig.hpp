@@ -46,7 +46,7 @@ namespace ImuConfig
         float magnScale; // mgauss per bit
     };
 
-    constexpr Device LSM9DS1 = {
+    inline constexpr Device LSM9DS1 = {
         0x006b, 0x001e,                     // Addresses
         0x0f, 0x68, 0x3d,                   // Who am I configuration
         0x20, 0x10, 0x20, 0x21, 0x22, 0x23, // Registers

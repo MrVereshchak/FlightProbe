@@ -1,11 +1,12 @@
 #pragma once
 
+#include <cstddef>
 
 namespace Config
 {
-    constexpr bool DEBUG_MODE = false;
-    constexpr bool DISPLAY_MODE = false;
-    constexpr bool CALIBRATION_MODE = false;
-    constexpr int CALIBRATION_COUNT = 500;
-    constexpr int EXPECTED_NUM_OF_DEVICES = 3;
+    inline constexpr bool DEBUG_MODE = false;
+    inline constexpr bool DISPLAY_MODE = false;
+    inline constexpr bool CALIBRATION_MODE = false;
+    inline constexpr std::uint32_t CALIBRATION_COUNT = 500;
+    inline constexpr int EXPECTED_NUM_OF_DEVICES = 3;
 }
